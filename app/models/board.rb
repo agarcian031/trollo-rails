@@ -15,7 +15,7 @@ class Board < ApplicationRecord
       SELECT * 
       FROM boards
       WHERE id = #{id}
-    ")
+    ").first 
     
   end 
 end

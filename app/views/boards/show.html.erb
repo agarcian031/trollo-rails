@@ -1,6 +1,12 @@
-<h1>Boards</h1>
-<% @boards.each do |board|%>
-<%= board.name %>
-<%= link_to 'View Board', board_path(board), class: "btn" %>
-<%= link_to 'Edit Board', edit_board_path(board), class: "btn"%>
-<%= link_to 'Delete Board', board_path(board), method: :delete, class: "btn" %>
+<h1> <%= @board.name %>'s Branches </h1>
+<hr>
+<%= link_to 'Create Branch', new_board_list_path(@board), class: "btn" %>
+<% @board.lists.each do |list|%>
+<h5><%= list.name %></h5> 
+<br>
+<%= link_to 'View Branch', board_lists_path(@board), class: "btn" %>
+<%= link_to 'Edit Branch', edit_board_list_path(@board, list), class: "btn" %>
+<%= link_to 'Delete Branch', board_list_path(@board, list), method: :delete, class: "btn" %>
+<br>
+<hr>
+<% end %>
