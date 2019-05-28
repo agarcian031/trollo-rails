@@ -1,15 +1,17 @@
 class ListsController < ApplicationController
-  before_action :set_board
+  before_action :set_board, except: [:update, :destroy]
   before_action :set_list, only: [:show, :edit, :update, :destroy]
 
   def index
     #Action Record
-    # @lists = @board.lists
+    @lists = @board.lists.all 
+
     #SQL 
-    @lists = List.all_lists(@board.id)
+    # @lists = List.all_lists(@board.id)
   end
 
   def show
+    @task = @lists.tasks
   end
 
   def new
@@ -18,10 +20,12 @@ class ListsController < ApplicationController
 
   def create 
     @list = @board.lists.new(list_params)
+    @list.board
     if @list.save
-      redirect_to board_lists_path(@board)
+      redirect_to board_path(@board)
     else 
-      render :new 
+      # render :new 
+      redirect_to @board
     end 
   end 
 
@@ -29,33 +33,34 @@ class ListsController < ApplicationController
   end
 
   def update
-    if @list.update(list_params)
-      redirect_to board_list_path(@board, @list)
+    if @list.update(name: list_params[:name])
+      redirect_to @list.board
     else
       render :edit
     end 
   end 
 
   def destroy
+    @list.board 
     @list.destroy
-    redirect_to board_lists_path(@board)
+    redirect_to @list.board
 
   end 
 
   private 
   def set_board
     #Active Record 
-    # @board = Board.find(params[:board_it])
+    @board = Board.find(params[:board_id])
     #SQL 
-    @board = Board.single_board(params[:board_id])
+    # @board = Board.single_board(params[:board_id])
   end 
 
   def set_list 
     # Active Record 
-    # @list = List.find(params[:id])
+    @list = List.find(params[:id])
 
     #SQL 
-    @list = List.single_list(@board.id, params[:id])
+    # @list = List.single_list(@board.id, params[:id])
   end 
 
   def list_params 

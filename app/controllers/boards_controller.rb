@@ -2,12 +2,18 @@ class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
   def index
     #Active Record 
-    # @boards = Board.all
+    @boards = Board.all
+
     #SQL 
-    @boards = Board.all_boards
+    # @boards = Board.all_boards
   end
 
   def show
+    @lists = @board.lists.all
+    # @lists = @board.lists.all.order("created_at")
+    # @list = @board.lists.new 
+    # @task = @list.tasks.new
+    # @tasks = @list.tasks.all.order("created_at")
   end
 
   def new
@@ -29,7 +35,7 @@ class BoardsController < ApplicationController
 
   def update
     if @board.update(board_params)
-      redirect_to board_path(@board)
+      redirect_to boards_path
     else 
       render :edit 
     end 
@@ -43,10 +49,10 @@ class BoardsController < ApplicationController
   private 
   def set_board
     # Active Record 
-    # @board = Board.find(params[:id])
+    @board = Board.find(params[:id])
 
     #SQL 
-    @board = Board.single_board(params[:id])
+    # @board = Board.single_board(params[:id])
   end 
 
   def board_params

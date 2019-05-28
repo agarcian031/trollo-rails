@@ -1,1 +1,20 @@
-@import "materialize"; 
+@import "semantic-ui";
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:400,700&display=swap');
+
+// h1, h2 {
+//   color: #fff; 
+// }
+* {
+  font-family: Libre Franklin; 
+  font-weight: bold; 
+}
+
+.ui.centered.header {
+  color: #fff; 
+}
+body {
+  background: #314755;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #26a0da, #314755);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #26a0da, #314755); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}

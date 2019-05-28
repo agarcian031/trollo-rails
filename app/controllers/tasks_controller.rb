@@ -1,12 +1,14 @@
 class TasksController < ApplicationController
+  before_action :set_board
   before_action :set_list_task
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     #Action Record
     # @tasks = @list.tasks
+    @tasks = @list.tasks.all
     #SQL 
-    @tasks = Task.all_tasks(@list.id)
+    # @tasks = Task.all_tasks(@list.id)
   end
 
   def show
@@ -18,10 +20,12 @@ class TasksController < ApplicationController
 
   def create 
     @task = @list.tasks.new(task_params)
+    @task.list
     if @task.save
-      redirect_to list_tasks_path(@list)
+      redirect_to @board
     else 
-      render :new 
+      # render :new 
+      redirect_to @board
     end 
   end 
 
@@ -38,7 +42,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to list_tasks_path(@list)
+    redirect_to @board
 
   end 
 
@@ -52,10 +56,14 @@ class TasksController < ApplicationController
 
   def set_task 
     # Active Record 
-    # @task = Task.find(params[:id])
+    @task = Task.find(params[:id])
 
     #SQL 
-    @task = Task.single_task(@list.id, params[:id])
+    # @task = Task.single_task(@list.id, params[:id])
+  end 
+
+  def set_board
+    @board = Board.find(params[:board_id])
   end 
 
   def task_params 

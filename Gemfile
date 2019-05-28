@@ -36,7 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 #Rails authentication 
 gem 'devise'
 #CSS Framework 
-gem 'materialize-sass'
+gem 'semantic-ui-sass', '~> 2.2', '>= 2.2.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

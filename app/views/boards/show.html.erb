@@ -1,12 +1,41 @@
-<h1> <%= @board.name %>'s Branches </h1>
+<h1 class="ui centered header"><%= @board.name %><h1>
+<div class="ui two buttons">
+<%= link_to "Edit Board", edit_board_path(@board), class: "ui button" %>
+<%= link_to "New List", new_board_list_path(@board), class:"ui green button"%>
+<%# link_to "Delete", @board, method: :delete, class: "ui red button" %>
+</div>
 <hr>
-<%= link_to 'Create List', new_board_list_path(@board), class: "btn" %>
-<% @board.lists.each do |list|%>
-<h5><%= list.name %></h5> 
-<br>
-<%= link_to 'View List', board_list_path(@board, list), class: "btn" %>
-<%= link_to 'Edit List', edit_board_list_path(@board, list), class: "btn" %>
-<%= link_to 'Delete List', board_list_path(@board, list), method: :delete, class: "btn" %>
-<br>
-<hr>
+<div class="ui grid">
+<% @board.lists.each do |list| %>
+  <div class="five wide column">
+    <div class="ui raised center aligned blue segment">
+      <h3> <%= list.name %> </h3>
+      <%= link_to 'New Task', new_list_task_path(list), class: "ui mini green button inverted" %>
+      <hr>
+      <% list.tasks.sort_by.each do |task| %>
+      <div class="five wide column">
+        <div class="ui raised center green aligned segment">
+          <p> <%= task.description %> <p>
+          <div class= "ui two mini buttons">
+          <%= link_to "Edit", edit_list_task_path(task.list_id, task.id), class: "ui button" %>
+                  <%= link_to "Delete", list_task_path(task.list_id, task.id), method: :delete, class: "ui red button inverted" %>
+          </div>
+        </div>
+        
+      </div>
+        <hr>
+            <%end%>
+            <div class="ui mini two buttons">
+          <%= link_to "Edit", edit_board_list_path(list.board_id, list.id), class: "ui button" %>
+          <%= link_to "Delete", list, method: :delete, class: "ui red button" %>
+          </div>
+    </div>
+  </div>
 <% end %>
+</div>
+
+
+
+
+
+

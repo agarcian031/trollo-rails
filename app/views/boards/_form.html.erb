@@ -1,8 +1,10 @@
-<%= form_with(model: @board, local: true) do |f| %>
+<%= form_with(model: @board, local: true, class: "ui form") do |f| %>
  <div class="field">
   <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true, required: true %>
+  <%= f.text_field :name, autofocus: true, required: true, placeholder: "e.g. Concerning Hobbits" %>
  </div>
-
- <%= f.submit nil, class: "btn"%>
+<div class="ui buttons">
+ <%= f.submit nil, class: "ui button blue"%> 
+ <%= link_to 'Back', boards_path, class: "ui button red" %>
+ </div>
 <% end %>

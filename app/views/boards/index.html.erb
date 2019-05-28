@@ -1,11 +1,23 @@
-<h1>Boards</h1>
+
+
+<h1 class="ui centered header ">Boards</h1>
 <hr>
+<div class="ui grid">
 <% @boards.each do |board|%>
-<h5><%= board.name %></h5>
-<br>
-<%= link_to 'View Board', board_path(board), class: "btn" %> |
-<%= link_to 'Edit Board', edit_board_path(board), class: "btn"%> |
-<%= link_to 'Delete Board', board_path(board), method: :delete, class: "btn" %>
-<hr>
-<br>
-<% end %>
+  <div class="four wide column">
+    <div class= "ui raised card">
+    <div class="content">
+      <div class="ui centered header"><%= board.name %></div>
+      <div class="description">
+      <div class= "ui three tiny buttons">
+        <%= link_to 'View', board_path(board), class: "ui button" %> |
+        <%= link_to 'Edit', edit_board_path(board), class: "ui button"%> |
+        <%= link_to 'Delete', board_path(board), method: :delete, class: "ui button" %>
+      
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+ <%end%>
+</div>

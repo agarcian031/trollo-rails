@@ -1,5 +1,9 @@
-<nav>
-  <%= link_to "Home",  root_path, class: "btn"%>
-  <%= link_to "Boards",  boards_path, class: "btn"%>
-  <%= link_to 'Create Boards', new_board_path, class: "btn" %>
-</nav>
+
+<div class="ui top menu">
+  <div class="item">
+    <i class="large trello icon blue"></i>
+  </div>
+ <%= link_to "Home",  root_path, class: " item"%>
+  <%= link_to "Boards",  boards_path, class: "item"%>
+  <%= link_to 'Create Boards', new_board_path, class: "item" %>
+</div>
